@@ -8,8 +8,10 @@ import com.google.gson.reflect.TypeToken;
 import com.tumblr.jumblr.JumblrClient;
 import com.tumblr.jumblr.types.Blog;
 import com.tumblr.jumblr.types.Post;
+import com.tumblr.jumblr.types.Posts;
 import com.tumblr.jumblr.types.Resource;
 import com.tumblr.jumblr.types.User;
+
 import java.util.List;
 
 public class ResponseWrapper {
@@ -39,12 +41,13 @@ public class ResponseWrapper {
     }
 
     // NOTE: needs to be duplicated logic due to Java erasure of generic types
-    public List<Post> getPosts() {
+    public Posts getPosts() {
         Gson gson = gsonParser();
         JsonObject object = (JsonObject) response;
         List<Post> l = gson.fromJson(object.get("posts"), new TypeToken<List<Post>>() {}.getType());
         for (Post e : l) { e.setClient(client); }
-        return l;
+        int totalCount = object.get("total_posts").getAsInt();
+        return new Posts(l, totalCount);
     }
 
     // NOTE: needs to be duplicated logic due to Java erasure of generic types

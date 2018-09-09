@@ -3,6 +3,7 @@ package com.tumblr.jumblr;
 import com.tumblr.jumblr.request.RequestBuilder;
 import com.tumblr.jumblr.types.Blog;
 import com.tumblr.jumblr.types.Post;
+import com.tumblr.jumblr.types.Posts;
 import com.tumblr.jumblr.types.User;
 import org.scribe.model.Token;
 
@@ -176,7 +177,7 @@ public class JumblrClient {
      * @param options the options for this call (or null)
      * @return a List of posts
      */
-    public List<Post> blogPosts(String blogName, Map<String, ?> options) {
+    public Posts blogPosts(String blogName, Map<String, ?> options) {
         if (options == null) {
             options = Collections.emptyMap();
         }
@@ -191,7 +192,7 @@ public class JumblrClient {
         return requestBuilder.get(JumblrClient.blogPath(blogName, path), soptions).getPosts();
     }
 
-    public List<Post> blogPosts(String blogName) {
+    public Posts blogPosts(String blogName) {
         return this.blogPosts(blogName, null);
     }
 

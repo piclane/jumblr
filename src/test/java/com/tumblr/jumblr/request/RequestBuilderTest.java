@@ -3,15 +3,20 @@ package com.tumblr.jumblr.request;
 import com.tumblr.jumblr.JumblrClient;
 import com.tumblr.jumblr.exceptions.JumblrException;
 import com.tumblr.jumblr.responses.ResponseWrapper;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
@@ -28,7 +33,8 @@ public class RequestBuilderTest {
         rb = new RequestBuilder(null);
     }
 
-    @Test
+    @SuppressWarnings("unused")
+	@Test
     public void testClearEmptyJson() {
         Response r = mock(Response.class);
         when(r.getCode()).thenReturn(200);

@@ -9,7 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.gson.annotations.JsonAdapter;
 
 /**
  * This class is the base of all post types on Tumblr
@@ -56,8 +59,13 @@ public class Post extends Resource {
     private String date;
     private List<String> tags;
     private Boolean bookmarklet, mobile;
+    
+    @JsonAdapter(UrlJsonAdapter.class)
     private String source_url;
     private String source_title;
+    
+    @JsonAdapter(UrlJsonAdapter.class)
+    private String link_url;
     private Boolean liked;
     private String slug;
     private Long reblogged_from_id, reblogged_root_id;
@@ -65,6 +73,7 @@ public class Post extends Resource {
     private String reblogged_root_url, reblogged_root_name, reblogged_root_title;
     private Long note_count;
     private List<Note> notes;
+    private boolean isAttachReblogTree = true; 
 
     /**
      * Get the id of the author of the post
@@ -97,7 +106,15 @@ public class Post extends Resource {
     public String getSourceUrl() {
         return source_url;
     }
-
+    
+    /**
+     * Get the link URL for this post
+     * @return link URL
+     */
+    public String getLinkUrl() {
+        return link_url;
+    }
+    
     /**
      * Get whether or not this post was from mobile
      * @return boolean
@@ -290,8 +307,26 @@ public class Post extends Resource {
     public List<Note> getNotes() {
         return notes;
     }
-
+    
     /**
+	 * isAttachReblogTree を取得します
+	 *
+	 * @return isAttachReblogTree
+	 */
+	public Boolean isAttachReblogTree() {
+		return isAttachReblogTree;
+	}
+
+	/**
+	 * isAttachReblogTree を設定します
+	 * 
+	 * @param isAttachReblogTree isAttachReblogTree
+	 */
+	public void setAttachReblogTree(Boolean isAttachReblogTree) {
+		this.isAttachReblogTree = isAttachReblogTree;
+	}
+
+	/**
      * Delete this post
      */
     public void delete() {
@@ -436,6 +471,7 @@ public class Post extends Resource {
         map.put("slug", slug);
         map.put("date", date);
         map.put("type", getType().getValue());
+    	map.put("attach_reblog_tree", isAttachReblogTree ? "true" : "false");
         return map;
     }
 

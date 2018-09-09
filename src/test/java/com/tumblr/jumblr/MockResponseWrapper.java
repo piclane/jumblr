@@ -6,6 +6,7 @@ import java.util.List;
 import com.tumblr.jumblr.responses.ResponseWrapper;
 import com.tumblr.jumblr.types.Blog;
 import com.tumblr.jumblr.types.Post;
+import com.tumblr.jumblr.types.Posts;
 import com.tumblr.jumblr.types.User;
 
 /**
@@ -15,8 +16,8 @@ import com.tumblr.jumblr.types.User;
 public class MockResponseWrapper extends ResponseWrapper {
 
     @Override
-    public List<Post> getPosts() {
-        return new ArrayList<Post>();
+    public Posts getPosts() {
+        return new Posts(new ArrayList<Post>(), 0);
     }
 
     @Override
