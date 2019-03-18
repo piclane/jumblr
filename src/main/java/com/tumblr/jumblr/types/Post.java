@@ -12,8 +12,6 @@ import java.util.TimeZone;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.gson.annotations.JsonAdapter;
-
 /**
  * This class is the base of all post types on Tumblr
  * @author jc
@@ -60,11 +58,9 @@ public class Post extends Resource {
     private List<String> tags;
     private Boolean bookmarklet, mobile;
     
-    @JsonAdapter(UrlJsonAdapter.class)
     private String source_url;
     private String source_title;
     
-    @JsonAdapter(UrlJsonAdapter.class)
     private String link_url;
     private Boolean liked;
     private String slug;

@@ -12,3 +12,5 @@ javadoc
 .idea/
 *.iml
 /bin/
+/build/
+/.gradle/

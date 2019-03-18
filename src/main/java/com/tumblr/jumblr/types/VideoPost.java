@@ -14,6 +14,7 @@ public class VideoPost extends Post {
     private String caption;
     private String embed, permalink_url;
     private File data;
+    private String video_url;
     private String thumbnail_url;
     private int thumbnail_width;
     private int thumbnail_height;
@@ -88,6 +89,10 @@ public class VideoPost extends Post {
             throw new IllegalArgumentException("Cannot supply both embed & data");
         }
         this.data = file;
+    }
+    
+    public String getVideoUrl() {
+    	return video_url;
     }
 
     /**
