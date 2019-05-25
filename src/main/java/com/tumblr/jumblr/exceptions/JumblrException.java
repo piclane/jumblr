@@ -37,7 +37,7 @@ public class JumblrException extends RuntimeException {
             } else {
                 this.message = body;
             }
-        } catch (JsonParseException ex) {
+        } catch (Exception ex) {
             this.message = body;
         }
     }
